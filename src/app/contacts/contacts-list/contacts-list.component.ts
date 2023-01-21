@@ -13,4 +13,7 @@ export class ContactsListComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.contacts);
   }
+  testClick () {
+    console.log('kliknięto klawisz');
+  }
 }

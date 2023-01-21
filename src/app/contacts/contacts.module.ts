@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactsListComponent } from './contacts-list/contacts-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -9,10 +10,11 @@ import { ContactsListComponent } from './contacts-list/contacts-list.component';
     ContactsListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   exports: [
-    ContactsListComponent
+    ContactsListComponent,
   ]
 })
 export class ContactsModule { }
