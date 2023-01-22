@@ -31,4 +31,5 @@ export class ContactsService {
   updateContact(id: number, data: object): Observable<any> {
     return this.httpClient.put(`${this.baseApiUrl}/contact/${id}`, data);
   }
+
 }

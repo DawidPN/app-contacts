@@ -22,6 +22,7 @@ export class ContactModComponent {
     console.log(this.contact);
     this.buildContactForm();
     this.addDataToForm();
+    this.compareData();
   }
 
   private buildContactForm() {
@@ -36,21 +37,41 @@ export class ContactModComponent {
       firstName: ['', [Validators.required, Validators.pattern(firstNamePattern)]],
       phoneNumber: ['', [Validators.required, Validators.pattern(phoneNumberPattern)]]
     })
+
   }
 
   updateContact() {
-    this.contactsService.updateContact(this.contact[0].id, this.contactForm.value).subscribe(() => this.router.navigate(['/contacts']));
+    this.contactsService.updateContact(this.contact[0].id, this.contactForm.value).subscribe(() => 
+    this.router.navigate(['/contacts']));
   }
 
   loadContact() {
     this.contact = this.route.snapshot.data['contact'];
   }
-  
+
   addDataToForm() {
     this.contactForm.setValue({
-      "surname":this.contact[0].surname,
-      "firstName":this.contact[0].firstName,
-      "phoneNumber":this.contact[0].phoneNumber
-    });
+
+      "surname": this.contact[0].surname,
+      "firstName": this.contact[0].firstName,
+      "phoneNumber": this.contact[0].phoneNumber
+
+    })
   }
+
+  compareData() {
+    const dataFromForm = this.contactForm.value;
+    const dataFromSrv = this.contact[0];
+    delete(dataFromSrv.id);
+
+    // console.log(dataFromForm);
+    // console.log(dataFromSrv);
+
+    if(JSON.stringify(dataFromForm) === JSON.stringify(dataFromSrv)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
