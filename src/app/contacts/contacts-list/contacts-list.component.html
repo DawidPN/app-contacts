@@ -1,24 +1,27 @@
 <app-header>
-    <span content>Lista wszystkich kontaktów</span>
+    <span content>:: Lista wszystkich kontaktów ::</span>
 </app-header>
 
 <table *ngIf="contacts.length > 0; else noContactsAlert" class="table table-striped table-hover">
+
     <thead>
         <tr>
             <th>Lp</th>
             <th>Nazwisko</th>
             <th>Imię</th>
-            <th>Numer Telefonu</th>
+            <th>Nr telefonu</th>
         </tr>
     </thead>
+    
     <tbody>
         <tr *ngFor="let contact of contacts; let i = index" [routerLink]="['/contact', contact.id]">
-            <td>{{ i+1 }}</td>
+            <td>{{ i + 1 }}</td>
             <td>{{ contact.surname }}</td>
             <td>{{ contact.firstName }}</td>
             <td>{{ contact.phoneNumber }}</td>
         </tr>
     </tbody>
+
 </table>
 
 <ng-template #noContactsAlert>

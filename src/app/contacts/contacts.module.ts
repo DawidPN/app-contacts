@@ -5,8 +5,6 @@ import { SharedModule } from '../shared/shared.module';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { RouterModule } from '@angular/router';
 
-
-
 @NgModule({
   declarations: [
     ContactsListComponent,
