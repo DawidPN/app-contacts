@@ -7,18 +7,20 @@ import { ContactsService } from '../contacts.service';
   templateUrl: './contact-details.component.html',
   styleUrls: ['./contact-details.component.scss']
 })
-
 export class ContactDetailsComponent implements OnInit {
+
   contactDetails: any = {};
-  constructor(private contacsService: ContactsService, private route: ActivatedRoute) { }
-  
+
+  constructor(private contactsService: ContactsService, private route: ActivatedRoute) {}
+
   ngOnInit(): void {
     this.loadContact();
-    console.log(this.contactDetails);
   }
 
   loadContact(): void {
-    const id = this.route.snapshot.params['id']
-    this.contacsService.getContact(id).subscribe(contact => this.contactDetails = contact[0])
+    const id = this.route.snapshot.params['id'];
+    this.contactsService.getContact(id).subscribe(contact => this.contactDetails = contact[0]);
   }
+
+
 }

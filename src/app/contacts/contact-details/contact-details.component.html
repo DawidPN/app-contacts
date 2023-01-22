@@ -1,7 +1,9 @@
 <app-header>
-    <span content>:: Szczegóły wybranego kontaktu ::</span>
+    <span class="header-span" content>:: Szczegóły wybranego kontaktu ::</span>
 </app-header>
-<p>Nazwisko: {{contactDetails.surname}}</p>
-<p>Imię: {{contactDetails.firstName}}</p>
-<p>Numer telefonu: {{contactDetails.phoneNumber}}</p>
-<button [routerLink]="['/contacts']" type="button" class="btn btn-secondary">Wtecz</button>
+
+<p>Nazwisko: {{ contactDetails.surname }}</p>
+<p>Imię: {{ contactDetails.firstName }}</p>
+<p>Nr telefonu: {{ contactDetails.phoneNumber }}</p>
+
+<button [routerLink]="['/contacts']" mat-stroked-button color="primary">Wstecz</button>
