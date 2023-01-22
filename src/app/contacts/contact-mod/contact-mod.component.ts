@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContactsService } from '../contacts.service';
 
 @Component({
-  selector: 'app-contact-add',
-  templateUrl: './contact-add.component.html',
-  styleUrls: ['./contact-add.component.scss']
+  selector: 'app-contact-mod',
+  templateUrl: './contact-mod.component.html',
+  styleUrls: ['./contact-mod.component.scss']
 })
-export class ContactAddComponent implements OnInit {
+export class ContactModComponent {
+
+  contact: any = [];
 
   contactForm: FormGroup = new FormGroup({});
 
   constructor(private fb: FormBuilder, private contactsService: ContactsService, 
-    private router: Router) {}
+    private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.loadContact();
+    console.log(this.contact);
     this.buildContactForm();
+    this.addDataToForm();
   }
 
   private buildContactForm() {
@@ -31,12 +36,21 @@ export class ContactAddComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.pattern(firstNamePattern)]],
       phoneNumber: ['', [Validators.required, Validators.pattern(phoneNumberPattern)]]
     })
-
   }
 
-  addContact() {
-    this.contactsService.addContact(this.contactForm.value).subscribe(() => 
-    this.router.navigate(['/contacts']));
+  updateContact() {
+    this.contactsService.updateContact(this.contact[0].id, this.contactForm.value).subscribe(() => this.router.navigate(['/contacts']));
   }
 
+  loadContact() {
+    this.contact = this.route.snapshot.data['contact'];
+  }
+  
+  addDataToForm() {
+    this.contactForm.setValue({
+      "surname":this.contact[0].surname,
+      "firstName":this.contact[0].firstName,
+      "phoneNumber":this.contact[0].phoneNumber
+    });
+  }
 }
